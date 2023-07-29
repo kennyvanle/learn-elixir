@@ -49,5 +49,12 @@ defmodule Test do
   IO.puts("single-quotes and double-quote representations are NOT equivalent")
 
   IO.puts("a final note is that while we can update values with methods, they only stay updated if we reassign them. all values are immutable.for example, every operation on a typle returns a new typle, it never changes the given one")
+  IO.puts("*****************************")
+  IO.puts("lists are stored in memory as linked lits which emans that each element in a list holds its value and we need to traverse the whole list in order to figure out its size")
+  IO.puts("this makes it easy to combine lists with ++")
+  ls = [1, 2, 3, 4]
+  newls = ls ++ [0]
+  IO.puts("[1, 2, 3, 4] ++ [0] =")
+  IO.inspect(newls)
 
 end
