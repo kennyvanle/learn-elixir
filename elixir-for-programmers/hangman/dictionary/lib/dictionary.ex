@@ -1,11 +1,12 @@
 defmodule Dictionary do
- def word_list do
-   words = File.read!("assets/words.txt")
-   String.split(words, ~r/\n/, trim: true)
-   # in elixir, the return value is always the last expression evaluated
- end
 
- def random_word do
-   Enum.random(word_list())
- end
+  # this is created at compile time, we can do this to read only once
+  @word_list "assets/words.txt"
+    |> File.read!()
+    |> String.split(~r/\n/, trim: true)
+
+  def random_word do
+    @word_list
+    |> Enum.random()
+  end
 end
