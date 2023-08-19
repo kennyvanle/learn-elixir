@@ -18,5 +18,14 @@ defmodule HangmanImplGameTest do
     assert game.letters == ["w","o","m","b","a","t"]
   end
 
+  test "word only contains lower case ASCII" do
+    game = Game.new_game("wombat")
+
+    Enum.each(game.letters, fn codepoint ->
+      assert codepoint == String.downcase(codepoint)
+      assert Regex.match?(~r/[a-z]/, codepoint)
+    end)
+  end
+
 end
 
