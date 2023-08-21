@@ -27,6 +27,16 @@ defmodule HangmanImplGameTest do
     end)
   end
 
+  test "guess can only contain lower case ASCII" do
+    game = Game.new_game("wombat")
+    { game, _tally } = Game.make_move(game, "X")
+    assert game.game_state == :invalid_guess
+    { game, _tally } = Game.make_move(game, "1")
+    assert game.game_state == :invalid_guess
+    { game, _tally } = Game.make_move(game, "@")
+    assert game.game_state == :invalid_guess
+  end
+
   test "state doesn't change if a game is won or lost" do
     for state <- [:won, :lost] do 
       game = Game.new_game("wombat")

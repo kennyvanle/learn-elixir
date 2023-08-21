@@ -40,19 +40,23 @@ defmodule Hangman.Impl.Game do
   end
 
   def make_move(game, guess) do
-    accept_guess(game, guess, MapSet.member?(game.used, guess))
+    accept_guess(game, guess, MapSet.member?(game.used, guess), String.match?(guess, ~r/^[a-z]$/))
     |> return_with_tally()
   end
 
   ##################################################
 
-  defp accept_guess(game, _guess, _already_used = true) do
+  defp accept_guess(game, _guess, _already_used = true, _is_valid = true) do
     %{ game | game_state: :already_used }
   end
 
-  defp accept_guess(game, guess, _already_used) do
+  defp accept_guess(game, guess, _already_used, _is_valid = true) do
     %{ game | used: MapSet.put(game.used, guess) }
     |> score_guess(Enum.member?(game.letters, guess))
+  end
+
+  defp accept_guess(game, _guess, _already_used, _is_valid) do
+    %{ game | game_state: :invalid_guess }
   end
 
   ##################################################
