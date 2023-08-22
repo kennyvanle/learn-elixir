@@ -76,7 +76,7 @@ defmodule Hangman.Impl.Game do
 
   ##################################################
 
-  defp tally(game) do
+  def tally(game) do
     %{
       turns_left: game.turns_left,
       game_state: game.game_state,
@@ -91,6 +91,10 @@ defmodule Hangman.Impl.Game do
 
   defp maybe_won(true), do: :won
   defp maybe_won(_),    do: :good_guess
+
+  defp reveal_guessed_letters(game = %{ game_state: :lost }) do
+    game.letters
+  end
 
   defp reveal_guessed_letters(game) do
     game.letters
