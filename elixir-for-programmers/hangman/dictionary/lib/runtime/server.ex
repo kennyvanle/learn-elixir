@@ -5,6 +5,10 @@ defmodule Dictionary.Runtime.Server do
   # __MODULE__ is an abbreviation for the full name of the current module
   @me __MODULE__
 
+  # this designates that we will be using a supervisor
+  # this adds the child_spec function to the module
+  use Agent
+
   alias Dictionary.Impl.WordList
 
   # now we can do something like:
@@ -17,7 +21,7 @@ defmodule Dictionary.Runtime.Server do
   # now we can do better
   # we can create a "named pid" which we can then pass into random_word
   # so that no longer takes a pid, it just looks it up by name
-  def start_link do
+  def start_link(_) do
     # start link, register pid under any name supplied
     Agent.start_link(&WordList.word_list/0, name: @me)
   end
