@@ -10,9 +10,9 @@ defmodule TextClient.Impl.Player do
     tally = Hangman.tally(game)
     interact({ game, tally })
   end
-  
+
   @spec interact(state) :: :ok
-  
+
   def interact({ _game, _tally = %{ game_state: :won }}) do
     IO.puts "Congrats, you won!"
   end
@@ -24,8 +24,8 @@ defmodule TextClient.Impl.Player do
   def interact({ game, tally }) do
     IO.puts feedback_for(tally)
     IO.puts current_word(tally)
-    Hangman.make_move(game, get_guess())
-    |> interact()
+    tally = Hangman.make_move(game, get_guess())
+    interact({ game, tally })
   end
 
   def feedback_for(tally = %{ game_state: :initializing }) do
@@ -41,9 +41,9 @@ defmodule TextClient.Impl.Player do
     [
     "Word so far: ",
     tally.letters |> Enum.join(" "),
-    "    turns left: ", 
+    "    turns left: ",
     tally.turns_left |> to_string,
-    "    used so far: ", 
+    "    used so far: ",
     tally.used |> Enum.join(",")
     ]
   end
