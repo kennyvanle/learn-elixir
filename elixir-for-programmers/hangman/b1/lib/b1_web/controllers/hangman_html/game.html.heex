@@ -1,22 +1,32 @@
-This is the game
+<div id="game" class="grid grid-cols-2">
+    <div class="column">
+        <pre>
+            <%=figure_for(@tally.turns_left) %>
+        </pre>
+    </div>
+    <div class="column">
+        <table class="text-left">
+        <tr>
+            <th>Turns left:</th>
+            <td><%= @tally.turns_left %></td>
+        </tr>
 
-<p>
-    Turns left: <%= @tally.turns_left %>
-</p>
+        <tr>
+            <th>Letters used:</th>
+            <td><%= @tally.used |> Enum.join(", ") %></td>
+        </tr>
 
-<p>
-    Letters used: <%= @tally.used |> Enum.join(", ") %>
-</p>
+        <tr>
+            <th>Word so far:</th>
+            <td><%= @tally.letters |> Enum.join(" ") %></td>
+        </tr>
+        </table>
 
-<p>
-    Word so far: <%= @tally.letters |> Enum.join(" ") %>
-</p>
-
-<.form :let={f} 
- for={@conn} 
- method="put"
- as="make_move"
- action={B1Web.Router.Helpers.hangman_path(@conn, :update)}>
-    <.input field={f[:guess]}/>
-    <.button>Make guess</.button>
-</.form>
+        <.form :let={f} for={@conn} method="put" as="make_move" action={B1Web.Router.Helpers.hangman_path(@conn,
+            :update)}>
+            <.input field={f[:guess]} />
+            <br/>
+            <.button>Make guess</.button>
+        </.form>
+    </div>
+</div>
