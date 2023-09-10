@@ -1,0 +1,22 @@
+This is the game
+
+<p>
+    Turns left: <%= @tally.turns_left %>
+</p>
+
+<p>
+    Letters used: <%= @tally.used |> Enum.join(", ") %>
+</p>
+
+<p>
+    Word so far: <%= @tally.letters |> Enum.join(" ") %>
+</p>
+
+<.form :let={f} 
+ for={@conn} 
+ method="put"
+ as="make_move"
+ action={B1Web.Router.Helpers.hangman_path(@conn, :update)}>
+    <.input field={f[:guess]}/>
+    <.button>Make guess</.button>
+</.form>
