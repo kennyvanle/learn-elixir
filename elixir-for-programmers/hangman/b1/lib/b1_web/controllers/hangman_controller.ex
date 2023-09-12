@@ -15,9 +15,9 @@ defmodule B1Web.HangmanController do
   end
 
   def update(conn, params) do
-    guess = params["make_move"]["guess"]
+    guess = params[":make_move"]["guess"]
 
-    put_in(conn.params["make_move"]["guess"], "")
+    put_in(conn.params[":make_move"]["guess"], "")
       |> get_session(:game)
       |> Hangman.make_move(guess)
 

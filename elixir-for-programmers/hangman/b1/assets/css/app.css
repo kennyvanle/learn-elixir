@@ -3,3 +3,28 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+.tally th {
+    font-weight: normal;
+    color: #aaa;
+}
+
+.tally td {
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+}
+
+form input {
+    max-width: 4rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.status.initializing  { color: #d884c5 }
+.status.good-guess    { color: green }
+.status.bad-guess     { color: coral }
+.status.invalid-guess { color: coral }
+.status.won           { color: dark-green; font-weight: bold }
+.status.lost          { color: crimson; font-weight: bold }
+.status.already-used  { color: #caa }
